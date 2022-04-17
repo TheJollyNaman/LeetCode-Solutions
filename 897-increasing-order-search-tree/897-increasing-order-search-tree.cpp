@@ -10,22 +10,20 @@
  * };
  */
 class Solution {
+TreeNode *dummy=new TreeNode(-1);
+	TreeNode *t=dummy;
 public:
-    TreeNode* head = new TreeNode(0);
-    TreeNode* ptr = head;
-    
-    void dfs(TreeNode* root){
-        if(root==NULL)
-            return;
-        dfs(root->left);
-        head->right = new TreeNode(root->val);
-        head=head->right;
-        dfs(root->right);
-        return;
-    }
-    
-    TreeNode* increasingBST(TreeNode* root) {
-        dfs(root);
-        return ptr->right;
-    }
+	void helper(TreeNode *root){
+		if(root){
+			helper(root->left);
+			t->right=root;
+			root->left=nullptr;
+			t=root;
+			helper(root->right);
+		}
+	}
+	TreeNode* increasingBST(TreeNode* root) {
+		 helper(root);
+		return dummy->right;
+	}
 };
