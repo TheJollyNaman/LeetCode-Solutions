@@ -9,7 +9,8 @@ public:
 		{
 			if(set.find(s[j]) == set.end()) 
 			{
-				set.insert(s[j++]); 
+				set.insert(s[j]);
+                j++;
 				ans = max(ans, j-i); 
 			}
 			else
