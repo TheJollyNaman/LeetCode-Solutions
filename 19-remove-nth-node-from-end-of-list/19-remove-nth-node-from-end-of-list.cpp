@@ -23,8 +23,10 @@ public:
             fast=fast->next;
             slow=slow->next;
         }
+        //take pointer delnode=start->next;
         slow->next=slow->next->next;
-        
+        //here you can delete delnode;
     return start->next; 
     }
 };
+
