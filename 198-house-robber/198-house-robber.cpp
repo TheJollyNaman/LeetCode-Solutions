@@ -1,23 +1,23 @@
 class Solution {
 private:
-        vector<int> dp = vector<int>(101,-1);
+        vector<int> dp = vector<int>(101,0);
 public:
     int dpp(vector<int>& nums,int ind){
-        if(ind==0)
-            return nums[0];
-        if(ind<0)
-            return 0;
-        if(dp[ind]!=-1)
-            return dp[ind];
+        dp[0]=nums[0];
         
-        int pick = nums[ind] + dpp(nums,ind-2);
-        int not_pick = 0 + dpp(nums,ind-1);
+        for(int i=1;i<ind;i++){
+            int take = nums[i];
+            if(i>1)
+                take+=dp[i-2];
+            int not_take = dp[i-1];
+            
+            dp[i] = max(take,not_take);
+        }
         
-        dp[ind] = max(pick,not_pick);
-        return dp[ind];
+        return dp[ind-1];
     }
     
     int rob(vector<int>& nums) {
-        return dpp(nums,nums.size()-1);
+        return dpp(nums,nums.size());
     }
 };
