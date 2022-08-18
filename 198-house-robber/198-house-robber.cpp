@@ -3,18 +3,22 @@ private:
         vector<int> dp = vector<int>(101,0);
 public:
     int dpp(vector<int>& nums,int ind){
-        dp[0]=nums[0];
+        int prev = nums[0];
+        int prev2 = 0;
+        int curri;
         
         for(int i=1;i<ind;i++){
             int take = nums[i];
             if(i>1)
-                take+=dp[i-2];
-            int not_take = dp[i-1];
+                take+=prev2;
+            int not_take = prev;
             
-            dp[i] = max(take,not_take);
+            curri = max(take,not_take);
+            prev2 = prev;
+            prev = curri;
         }
         
-        return dp[ind-1];
+        return prev;
     }
     
     int rob(vector<int>& nums) {
